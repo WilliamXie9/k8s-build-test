@@ -18,7 +18,7 @@ steps:
   - ethex-frontend=gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=fintend-coinpool-sit'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-test'
   id: deploy-k8s
 images:
 - 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA'
