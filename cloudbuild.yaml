@@ -3,7 +3,7 @@ steps:
   args: ['install']
   id: step1
 - name: 'gcr.io/cloud-builders/npm:node-8.9.3'
-  args: ['run', 'run-script', 'build']
+  args: ['run-script', 'build']
   id: build
 #- name: 'gcr.io/fintend-cloud/update-nginx-resource:v1.0.3'
 #  id: deploy_nginx_resource
