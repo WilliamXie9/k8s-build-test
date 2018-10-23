@@ -18,11 +18,11 @@ steps:
   - ethex-frontend=gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-test'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=us-central1-a'
   id: deploy-k8s
 images:
 - 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA'
-timeout: '3600s'
+timeout: '3601s'
 substitutions:
   #  _DEPLOY_URL: "https://static.coinpool.com/resource/dist"
   _DEPLOY_URL: ""
