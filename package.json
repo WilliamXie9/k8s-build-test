@@ -8,6 +8,7 @@
     "start": "ng serve",
     "test": "ng test",
     "build": "ng build --prod",
+    "build_sit": "./node_modules/.bin/ng build --prod --env=sit -aot",
     "e2e": "ng e2e",
     "ng": "ng"
   },
