@@ -1,28 +1,30 @@
 steps:
-  - name: 'gcr.io/cloud-builders/npm:node-8.9.3'
-    args: ['install']
-    id: step1
-  - name: 'gcr.io/cloud-builders/npm:node-8.9.3'
-    args: ['run', 'build_sit', '--', '--deploy-url=$_DEPLOY_URL']
-    id: build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA', '.' ]
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args:
-    - set
-    - image
-    - deployment
-    - ethex-frontend
-    - ethex-frontend=gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA
-    env:
-    - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=fintend-coinpool-sit'
-    id: deploy-k8s
+- name: 'gcr.io/cloud-builders/npm:node-8.9.3'
+  args: ['install']
+  id: step1
+- name: 'gcr.io/cloud-builders/npm:node-8.9.3'
+  args: ['run', 'build_sit', '--', '--deploy-url=$_DEPLOY_URL']
+  id: build
+- name: 'gcr.io/fintend-cloud/update-nginx-resource:v1.0.3'
+  id: deploy_nginx_resource
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA', '.' ]
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - set
+  - image
+  - deployment
+  - ethex-frontend
+  - ethex-frontend=gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=asia-southeast1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=fintend-coinpool-sit'
+  id: deploy-k8s
 images:
-  - 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA'
+- 'gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA'
 timeout: '3600s'
 substitutions:
-#  _DEPLOY_URL: "https://static.coinpool.com/resource/dist"
-   _DEPLOY_URL: ""
+  #  _DEPLOY_URL: "https://static.coinpool.com/resource/dist"
+  _DEPLOY_URL: ""
 options:
   machineType: 'N1_HIGHCPU_8'
