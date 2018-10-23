@@ -14,7 +14,7 @@ steps:
   - set
   - image
   - deployment
-  - ethex-frontend
+#  - ethex-frontend
   - ethex-frontend=gcr.io/$PROJECT_ID/ethex-frontend:$COMMIT_SHA
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
